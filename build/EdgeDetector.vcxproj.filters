@@ -4,6 +4,15 @@
     <ClCompile Include="D:\Self_Practicing\Computer Vision\Learning_OpenCV\EdgeDetector\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\Self_Practicing\Computer Vision\Learning_OpenCV\EdgeDetector\src\EdgeDetector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Self_Practicing\Computer Vision\Learning_OpenCV\EdgeDetector\src\Filter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Self_Practicing\Computer Vision\Learning_OpenCV\EdgeDetector\src\lib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="D:\Self_Practicing\Computer Vision\Learning_OpenCV\EdgeDetector\CMakeLists.txt" />

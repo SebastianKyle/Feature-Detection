@@ -18,9 +18,10 @@ set(SOURCES
     main.cpp
     src/EdgeDetector.cpp
     src/Filter.cpp
+    src/lib.cpp
 )
 
-add_executable(EdgeDetector main.cpp)
+add_executable(EdgeDetector ${SOURCES})
 
 target_link_libraries( EdgeDetector ${OpenCV_LIBS} )
 

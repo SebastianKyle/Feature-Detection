@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "*.ejs": "html",
+        "cmath": "cpp"
+    },
+    "cmake.debugConfig": {
+        "args": ["-canny", "D:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/images/circuit.png", "D:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/results/canny_edge_circuit.png", "110", "255"],
+        "cwd": "${workspaceFolder}",
+    }
+}

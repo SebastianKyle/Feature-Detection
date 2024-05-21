@@ -326,6 +326,9 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D:\Self_Practicing\Computer Vision\Learning_OpenCV\EdgeDetector\main.cpp" />
+    <ClCompile Include="D:\Self_Practicing\Computer Vision\Learning_OpenCV\EdgeDetector\src\EdgeDetector.cpp" />
+    <ClCompile Include="D:\Self_Practicing\Computer Vision\Learning_OpenCV\EdgeDetector\src\Filter.cpp" />
+    <ClCompile Include="D:\Self_Practicing\Computer Vision\Learning_OpenCV\EdgeDetector\src\lib.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\Self_Practicing\Computer Vision\Learning_OpenCV\EdgeDetector\build\ZERO_CHECK.vcxproj">

@@ -12,5 +12,6 @@
 
 bool str_compare(const char* a, std::string b);
 double char_2_double(char* argv[], int n);
+int char_2_int(char* argv[], int n);
 
 #endif

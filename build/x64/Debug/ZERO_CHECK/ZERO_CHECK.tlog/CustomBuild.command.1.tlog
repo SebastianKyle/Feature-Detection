@@ -1,0 +1,10 @@
+^D:\SELF_PRACTICING\COMPUTER VISION\LEARNING_OPENCV\EDGEDETECTOR\BUILD\CMAKEFILES\9CF44491A2BC2E8E9CC098995F63E635\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SD:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector" "-BD:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "D:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/build/EdgeDetector.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

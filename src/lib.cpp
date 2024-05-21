@@ -1,4 +1,4 @@
-#include "../header/lib.h"
+#include "lib.h"
 
 bool str_compare(const char* a, std::string b) {
     if (strlen(a) != b.length()) {
@@ -14,5 +14,10 @@ bool str_compare(const char* a, std::string b) {
 
 double char_2_double(char* argv[], int n) {
     double temp = std::stod(argv[n], NULL);
+    return temp;
+}
+
+int char_2_int(char* argv[], int n) {
+    int temp = std::stoi(argv[n], NULL);
     return temp;
 }

@@ -13,7 +13,7 @@ public:
 
     int detect_by_sobel(const cv::Mat& source_img, cv::Mat& dest_img);
     int detect_by_laplace(const cv::Mat& source_img, cv::Mat& dest_img);
-    int detect_by_canny(const cv::Mat& source_img, cv::Mat& dest_img);
+    int detect_by_canny(const cv::Mat& source_img, cv::Mat& dest_img, int low, int high);
 
     EdgeDetector();
     ~EdgeDetector();
