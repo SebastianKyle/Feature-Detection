@@ -154,8 +154,8 @@ int EdgeDetector::detect_by_canny(const cv::Mat &source_img, cv::Mat &dest_img, 
         angles.push_back(row_angles);
     }
 
-    if (height > Gmax)
-        height = Gmax;
+    // if (height > Gmax)
+    //     height = Gmax;
 
     // Non-max suppression
     for (int y = 1; y < height - 3; y++)
@@ -199,7 +199,7 @@ int EdgeDetector::detect_by_canny(const cv::Mat &source_img, cv::Mat &dest_img, 
     int non_max_height = output.rows, non_max_width = output.cols;
 
     // Hysteresis thresholding
-    // Is a weak edge in fact a string edge ?
+    // Is a weak edge in fact a strong edge ?
     for (int y = 1; y < non_max_height - 2; y++)
     {
         for (int x = 1; x < non_max_width - 2; x++)

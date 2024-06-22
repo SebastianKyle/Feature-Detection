@@ -12,7 +12,7 @@ public:
     int avg_filter(const cv::Mat& source_img, cv::Mat& dest_img, int k);
     int median_filter(const cv::Mat& source_img, cv::Mat& dest_img, int k);
     int gaussian_filter(const cv::Mat& source_img, cv::Mat& dest_img, int k);
-    int bilateral_filter(const cv::Mat& source_img, cv::Mat& dest_img, int k);
+    int bilateral_filter(const cv::Mat& source_img, cv::Mat& dest_img, int k, int sigma_b);
 
     Filter();
     ~Filter();

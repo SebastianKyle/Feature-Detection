@@ -18,6 +18,7 @@ set(SOURCES
     main.cpp
     src/EdgeDetector.cpp
     src/Filter.cpp
+    src/CornerDetector.cpp
     src/lib.cpp
 )
 

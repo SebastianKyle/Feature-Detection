@@ -328,6 +328,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\Self_Practicing\Computer Vision\Learning_OpenCV\EdgeDetector\main.cpp" />
     <ClCompile Include="D:\Self_Practicing\Computer Vision\Learning_OpenCV\EdgeDetector\src\EdgeDetector.cpp" />
     <ClCompile Include="D:\Self_Practicing\Computer Vision\Learning_OpenCV\EdgeDetector\src\Filter.cpp" />
+    <ClCompile Include="D:\Self_Practicing\Computer Vision\Learning_OpenCV\EdgeDetector\src\CornerDetector.cpp" />
     <ClCompile Include="D:\Self_Practicing\Computer Vision\Learning_OpenCV\EdgeDetector\src\lib.cpp" />
   </ItemGroup>
   <ItemGroup>

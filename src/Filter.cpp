@@ -248,7 +248,7 @@ int Filter::gaussian_filter(const cv::Mat &source_img, cv::Mat &dest_img, int k)
     return 1;
 }
 
-int Filter::bilateral_filter(const cv::Mat &source_img, cv::Mat &dest_img, int k)
+int Filter::bilateral_filter(const cv::Mat &source_img, cv::Mat &dest_img, int k, int sigma_b)
 {
     if (!source_img.data)
         return 0;
@@ -263,7 +263,6 @@ int Filter::bilateral_filter(const cv::Mat &source_img, cv::Mat &dest_img, int k
             // Expect k = 2t + 1
             int quarter_side = int((k - 1) / 2);
             int sigma = int(k / 6);
-            int sigma_b = 10;
             sigma = sigma == 0 ? 1 : sigma;
 
             if (source_img.channels() == 3)
