@@ -13,6 +13,9 @@
     <ClCompile Include="D:\Self_Practicing\Computer Vision\Learning_OpenCV\EdgeDetector\src\CornerDetector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\Self_Practicing\Computer Vision\Learning_OpenCV\EdgeDetector\src\FeatureDetector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="D:\Self_Practicing\Computer Vision\Learning_OpenCV\EdgeDetector\src\lib.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
