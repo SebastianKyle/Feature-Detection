@@ -4,7 +4,7 @@
         "cmath": "cpp"
     },
     "cmake.debugConfig": {
-        "args": ["-harris", "D:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/images/circuit.png", "D:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/results/harris_corner_circuit.png", "7", "3", "0.04"],
+        "args": ["-canny", "D:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/images/Valve.png", "D:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/results/canny_edge_Valve.png", "50", "150"],
         "cwd": "${workspaceFolder}",
     }
 }

@@ -83,17 +83,17 @@ int main(int argc, char **argv)
     {
         if (str_compare(argv[1], "-canny"))
         {
-            if (source_img.channels() == 3)
-            {
-                cv::Mat gray_img;
-                filter->rgb2gray_filter(source_img, gray_img);
-                filter->gaussian_filter(gray_img, filtered_img, 5);
-            }
-            else
-            {
-                filter->gaussian_filter(source_img, filtered_img, 5);
-            }
-            success = edge_detector->detect_by_canny(filtered_img, dest_img, char_2_int(argv, 4), char_2_int(argv, 5));
+            // if (source_img.channels() == 3)
+            // {
+            //     cv::Mat gray_img;
+            //     filter->rgb2gray_filter(source_img, gray_img);
+            //     filter->gaussian_filter(gray_img, filtered_img, 5);
+            // }
+            // else
+            // {
+            //     filter->gaussian_filter(source_img, filtered_img, 5);
+            // }
+            success = edge_detector->detect_by_canny(source_img, dest_img, char_2_int(argv, 4), char_2_int(argv, 5));
         }
         else if (str_compare(argv[1], "-bil"))
         {

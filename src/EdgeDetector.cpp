@@ -80,11 +80,7 @@ int EdgeDetector::detect_by_laplace(const cv::Mat &source_img, cv::Mat &dest_img
 
             int convolve = source_img.at<uchar>(y - 1, x - 1) + 4 * source_img.at<uchar>(y - 1, x) + source_img.at<uchar>(y - 1, x + 1) + 4 * source_img.at<uchar>(y, x - 1) - 20 * source_img.at<uchar>(y, x) + 4 * source_img.at<uchar>(y, x + 1) + source_img.at<uchar>(y + 1, x - 1) + 4 * source_img.at<uchar>(y + 1, x) + source_img.at<uchar>(y + 1, x + 1);
 
-            // "Zero-crossing"
-            int laplacian = int((1 / (6 * epsilon * epsilon)) * convolve + 128);
-            laplacian = abs(laplacian - 128) <= 80 ? 0 : 255;
-
-            output.at<uchar>(y, x) = cv::saturate_cast<uchar>(laplacian);
+            output.at<uchar>(y, x) = cv::saturate_cast<uchar>(std::abs(convolve));
         }
     }
 
@@ -104,121 +100,126 @@ int EdgeDetector::detect_by_canny(const cv::Mat &source_img, cv::Mat &dest_img, 
     if (min_grad > max_grad)
         min_grad = max_grad;
 
-    cv::Mat output = source_img.clone();
-    int width = source_img.cols, height = source_img.rows;
+    cv::Mat gray_img;
+    cv::cvtColor(source_img, gray_img, cv::COLOR_BGR2GRAY);
+
+    int width = gray_img.cols, height = gray_img.rows;
 
     double gx = 0, gy = 0;
     std::vector<double> row_grads;
-    std::vector<std::vector<double>> grads;
+    std::vector<std::vector<double>> grads(height, std::vector<double>(width));
     std::vector<int> row_angles;
-    std::vector<std::vector<int>> angles;
+    std::vector<std::vector<int>> angles(height, std::vector<int>(width));
 
     int Gmax = 0;
 
     for (int y = 1; y < height - 1; y++)
     {
-        row_grads.clear();
-        row_angles.clear();
-
         for (int x = 1; x < width - 1; x++)
         {
-            gx = x_gradient_sobel(source_img, x, y);
-            gy = y_gradient_sobel(source_img, x, y);
+            gx = x_gradient_sobel(gray_img, x, y);
+            gy = y_gradient_sobel(gray_img, x, y);
 
-            // Gradient magnitude
             double edge_grad = sqrt(gx * gx + gy * gy);
 
             if (edge_grad > Gmax)
+            {
                 Gmax = edge_grad;
-
-            row_grads.push_back(edge_grad);
-
-            // Gradient direction
-            double angle = atan2(gy, gx) * 180 / 3.14;
-
-            // Map the angle to discrete values
-            if ((angle >= 0 && angle < 22.5) || (angle > 157.5 && angle < 180) || (angle > -22.5 && angle < 0) ||
-                (angle > -180 && angle < -157.5))
-                angle = 0;
-            else if ((angle > 22.5 && angle < 67.5) || (angle > -157.5 && angle < -112.5))
-                angle = 45;
-            else if ((angle >= 67.5 && angle <= 112.5) || (angle > -112.5 && angle < -67.5))
-                angle = 90;
-            else if ((angle > 112.5 && angle <= 157.5) || (angle > -67.5 && angle < -22.5))
-                angle = 135;
-
-            row_angles.push_back(angle);
-        }
-
-        grads.push_back(row_grads);
-        angles.push_back(row_angles);
-    }
-
-    // if (height > Gmax)
-    //     height = Gmax;
-
-    // Non-max suppression
-    for (int y = 1; y < height - 3; y++)
-    {
-        for (int x = 1; x < width - 3; x++)
-        {
-            int value = grads[y][x];
-
-            // If a neighboring pixel to a direction has larger grad magnitude then
-            // the current pixel, it's not an edge, label it as 0
-            if (angles[y][x] == 45)
-            {
-                if (grads[y][x] < std::max(grads[y - 1][x - 1], grads[y + 1][x + 1]))
-                    value = 0;
-            }
-            else if (angles[y][x] == 90)
-            {
-                if (grads[y][x] < std::max(grads[y - 1][x], grads[y + 1][x]))
-                    value = 0;
-            }
-            else if (angles[y][x] == 135)
-            {
-                if (grads[y][x] < std::max(grads[y - 1][x + 1], grads[y + 1][x - 1]))
-                    value = 0;
-                else if (grads[y][x] < std::max(grads[y][x - 1], grads[y][x + 1]))
-                    value = 0;
             }
 
-            // Classify strong, weak and non-edge
-            if (value > max_grad)
-                value = 255;
-            else if (value < min_grad)
-                value = 0;
-            else
-                value = 128;
+            grads[y][x] = edge_grad;
 
-            output.at<uchar>(y, x) = cv::saturate_cast<uchar>(value);
+            double angle = atan2(gy, gx) * 100 / CV_PI;
+
+            if ((angle >= 0 && angle < 22.5) || (angle >= 157.5 && angle <= 180) || (angle >= -22.5 && angle < 0) ||
+                (angle >= -180 && angle < -157.5))
+                angles[y][x] = 0;
+            else if ((angle >= 22.5 && angle < 67.5) || (angle >= -157.5 && angle < -112.5))
+                angles[y][x] = 45;
+            else if ((angle >= 67.5 && angle < 112.5) || (angle >= -112.5 && angle < -67.5))
+                angles[y][x] = 90;
+            else if ((angle >= 112.5 && angle < 157.5) || (angle >= -67.5 && angle < -22.5))
+                angles[y][x] = 135;
         }
     }
 
-    int non_max_height = output.rows, non_max_width = output.cols;
+    cv::Mat nonmax_suppressed = cv::Mat::zeros(height, width, CV_8UC1);
 
-    // Hysteresis thresholding
-    // Is a weak edge in fact a strong edge ?
-    for (int y = 1; y < non_max_height - 2; y++)
+    for (int y = 1; y < height - 1; y++)
     {
-        for (int x = 1; x < non_max_width - 2; x++)
+        for (int x = 1; x < width - 1; x++)
         {
-            if (output.at<uchar>(y, x) == 128)
+            int angle = angles[y][x];
+            double magnitude = grads[y][x];
+
+            bool is_edge = true;
+
+            // If a neighboring pixel in the gradient direction has a larger gradient magnitude, it's not an edge
+            if (angle == 0)
             {
-                // If there's a neighbor of the pixel is a strong edge
-                // => it's a strong edge
-                if ((output.at<uchar>(y - 1, x - 1) == 255) || (output.at<uchar>(y - 1, x) == 255) || (output.at<uchar>(y - 1, x + 1) == 255) ||
-                    (output.at<uchar>(y, x - 1) == 255) || (output.at<uchar>(y, x + 1) == 255) ||
-                    (output.at<uchar>(y + 1, x - 1) == 255) || (output.at<uchar>(y + 1, x) == 255) || (output.at<uchar>(y + 1, x + 1) == 255))
-                    output.at<uchar>(y, x) = cv::saturate_cast<uchar>(255);
+                if (grads[y][x - 1] > magnitude || grads[y][x + 1] > magnitude)
+                    is_edge = false;
+            }
+            else if (angle == 45)
+            {
+                if (grads[y - 1][x + 1] > magnitude || grads[y + 1][x - 1] > magnitude)
+                    is_edge = false;
+            }
+            else if (angle == 90)
+            {
+                if (grads[y - 1][x] > magnitude || grads[y + 1][x] > magnitude)
+                    is_edge = false;
+            }
+            else if (angle == 135)
+            {
+                if (grads[y - 1][x - 1] > magnitude || grads[y + 1][x + 1] > magnitude)
+                    is_edge = false;
+            }
+
+            if (is_edge)
+            {
+                if (magnitude > max_grad)   // strong edge
+                    nonmax_suppressed.at<uchar>(y, x) = 255;
+                else if (magnitude >= min_grad)     // not sure (save for later)
+                    nonmax_suppressed.at<uchar>(y, x) = 128;
+                else    // weak edge
+                    nonmax_suppressed.at<uchar>(y, x) = 0;
+            }
+        }
+    }
+
+    // Hysteresis thresholding for "not sure" edges
+    for (int y = 1; y < height - 1; y++)
+    {
+        for (int x = 1; x < width - 1; x++)
+        {
+            if (nonmax_suppressed.at<uchar>(y, x) == 128)
+            {
+                bool is_connected_to_strong = false;
+
+                // Check 8-neighbors
+                for (int ky = -1; ky <= 1; ky++)
+                {
+                    for (int kx = -1; kx <= 1; kx++)
+                    {
+                        if (nonmax_suppressed.at<uchar>(y + ky, x + kx) == 255)
+                        {
+                            is_connected_to_strong = true;
+                            break;
+                        }
+                    }
+                    if (is_connected_to_strong)
+                        break;
+                }
+
+                if (is_connected_to_strong)
+                    nonmax_suppressed.at<uchar>(y, x) = 255;
                 else
-                    output.at<uchar>(y, x) = cv::saturate_cast<uchar>(0);
+                    nonmax_suppressed.at<uchar>(y, x) = 0;
             }
         }
     }
 
-    dest_img = output.clone();
-
+    dest_img = nonmax_suppressed.clone();
     return 1;
 }
