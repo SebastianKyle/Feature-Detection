@@ -77,4 +77,4 @@ Original | Harris corner (block-size = 5 & aperture-size = 3 & k = 0.04)
 ```
 Original | SIFT Keypoints (constrast-threshold = 0.025) | SIFT Keypoints (constrast-threshold = 0.025 and different orientation)
 :-------------------------:|:-------------------------:|:------------------------:
-![](./images/box1.png) | ![](./results/sift_box1.png) | ![](./results/sift_box2.png)
+![](./images/box1.jpg) | ![](./results/sift_box1.jpg) | ![](./results/sift_box2.jpg)
