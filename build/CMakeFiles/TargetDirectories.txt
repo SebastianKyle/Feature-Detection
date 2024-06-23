@@ -1,9 +1,0 @@
-D:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/build/CMakeFiles/Experimental.dir
-D:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/build/CMakeFiles/Nightly.dir
-D:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/build/CMakeFiles/Continuous.dir
-D:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/build/CMakeFiles/NightlyMemoryCheck.dir
-D:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/build/CMakeFiles/EdgeDetector.dir
-D:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/build/CMakeFiles/PACKAGE.dir
-D:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/build/CMakeFiles/RUN_TESTS.dir
-D:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/build/CMakeFiles/ALL_BUILD.dir
-D:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/build/CMakeFiles/ZERO_CHECK.dir
