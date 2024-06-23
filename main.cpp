@@ -80,7 +80,7 @@ int main(int argc, char **argv)
 
     /* Feature detect */
     else if (str_compare(argv[1], "-sift")) {
-        std::vector<cv::KeyPoint> keypoints = sift->detectKeypoints(source_img, 0.03f);
+        std::vector<cv::KeyPoint> keypoints = sift->detectKeypoints(source_img, char_2_double(argv, 4));
         sift->drawKeypoints(source_img, keypoints, dest_img);
 
         success = true;

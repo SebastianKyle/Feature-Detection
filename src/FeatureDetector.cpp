@@ -84,7 +84,7 @@ void SIFTDetector::detectExtrema(const std::vector<std::vector<cv::Mat>> &dog_py
                 {
                     float val = curr.at<float>(y, x);
 
-                    if (std::abs(val) > contrast_threshold)
+                    if (std::abs(val) >= contrast_threshold)
                     {
                         bool is_maxima = true;
                         bool is_minima = true;
