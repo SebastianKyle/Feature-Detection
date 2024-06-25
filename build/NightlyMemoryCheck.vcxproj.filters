@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\Self_Practicing\Computer Vision\Learning_OpenCV\EdgeDetector\build\CMakeFiles\9cf44491a2bc2e8e9cc098995f63e635\NightlyMemoryCheck.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\Self_Practicing\Computer Vision\Learning_OpenCV\EdgeDetector\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\Self_Practicing\Computer Vision\Learning_OpenCV\EdgeDetector\build\CMakeFiles\NightlyMemoryCheck" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{1D981D43-C69E-3A65-89A1-48334E254D7B}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

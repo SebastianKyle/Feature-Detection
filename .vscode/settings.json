@@ -5,7 +5,7 @@
         "ostream": "cpp"
     },
     "cmake.debugConfig": {
-        "args": ["-sift", "D:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/images/box1.jpg", "D:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/results/sift_box1.jpg", "0.025"],
+        "args": ["-harris", "D:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/images/circuit.png", "D:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/results/harris_circuit.png", "11", "5", "0.04"],
         "cwd": "${workspaceFolder}",
     }
 }

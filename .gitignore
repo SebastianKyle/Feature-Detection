@@ -1,9 +1,4 @@
-/build
-*.o
-*.obj
-*.so
-*.exe
-*.dll
+/build/.vs
 *.pdb
 *.user
 *.log
