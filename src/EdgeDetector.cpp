@@ -69,18 +69,42 @@ int EdgeDetector::detect_by_laplace(const cv::Mat &source_img, cv::Mat &dest_img
     if (!source_img.data)
         return 0;
 
-    cv::Mat output = source_img.clone();
+    cv::Mat output = cv::Mat::zeros(source_img.size(), CV_8U);
     int width = source_img.cols, height = source_img.rows;
 
+    float threshold = 100.0;
     for (int y = 1; y < height - 1; y++)
     {
         for (int x = 1; x < width - 1; x++)
         {
-            double epsilon = 0.7;
+            int convolve = -source_img.at<uchar>(y - 1, x) - source_img.at<uchar>(y, x - 1) + 4 * source_img.at<uchar>(y, x) - source_img.at<uchar>(y, x + 1) - source_img.at<uchar>(y + 1, x);
 
-            int convolve = source_img.at<uchar>(y - 1, x - 1) + 4 * source_img.at<uchar>(y - 1, x) + source_img.at<uchar>(y - 1, x + 1) + 4 * source_img.at<uchar>(y, x - 1) - 20 * source_img.at<uchar>(y, x) + 4 * source_img.at<uchar>(y, x + 1) + source_img.at<uchar>(y + 1, x - 1) + 4 * source_img.at<uchar>(y + 1, x) + source_img.at<uchar>(y + 1, x + 1);
+            bool zero_crossing = false;
 
-            output.at<uchar>(y, x) = cv::saturate_cast<uchar>(std::abs(convolve));
+            float neighbors[8] = {
+                source_img.at<uchar>(y - 1, x - 1),
+                source_img.at<uchar>(y - 1, x),
+                source_img.at<uchar>(y - 1, x + 1),
+                source_img.at<uchar>(y, x - 1),
+                source_img.at<uchar>(y, x + 1),
+                source_img.at<uchar>(y + 1, x - 1),
+                source_img.at<uchar>(y + 1, x),
+                source_img.at<uchar>(y + 1, x + 1)};
+
+            for (int i = 0; i < 8; i++)
+            {
+                if ((convolve > 0 && neighbors[i] < -threshold) ||
+                    (convolve < 0 && neighbors[i] > threshold))
+                {
+                    zero_crossing = true;
+                    break;
+                }
+            }
+
+            if (zero_crossing)
+            {
+                output.at<uchar>(y, x) = 255;
+            }
         }
     }
 
@@ -178,11 +202,11 @@ int EdgeDetector::detect_by_canny(const cv::Mat &source_img, cv::Mat &dest_img, 
 
             if (is_edge)
             {
-                if (magnitude > max_grad)   // strong edge
+                if (magnitude > max_grad) // strong edge
                     nonmax_suppressed.at<uchar>(y, x) = 255;
-                else if (magnitude >= min_grad)     // not sure (save for later)
+                else if (magnitude >= min_grad) // not sure (save for later)
                     nonmax_suppressed.at<uchar>(y, x) = 128;
-                else    // weak edge
+                else // weak edge
                     nonmax_suppressed.at<uchar>(y, x) = 0;
             }
         }

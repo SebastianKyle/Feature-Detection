@@ -61,7 +61,7 @@ int main(int argc, char **argv)
         {
             cv::Mat gray_img;
             filter->rgb2gray_filter(source_img, gray_img);
-            filter->gaussian_filter(gray_img, filtered_img, 3);
+            filter->gaussian_filter(gray_img, filtered_img, 7);
         }
         else
         {
