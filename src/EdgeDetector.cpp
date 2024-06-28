@@ -72,7 +72,7 @@ int EdgeDetector::detect_by_laplace(const cv::Mat &source_img, cv::Mat &dest_img
     cv::Mat output = cv::Mat::zeros(source_img.size(), CV_8U);
     int width = source_img.cols, height = source_img.rows;
 
-    float threshold = 100.0;
+    float threshold = 40.0;
     for (int y = 1; y < height - 1; y++)
     {
         for (int x = 1; x < width - 1; x++)
@@ -93,8 +93,8 @@ int EdgeDetector::detect_by_laplace(const cv::Mat &source_img, cv::Mat &dest_img
 
             for (int i = 0; i < 8; i++)
             {
-                if ((convolve > 0 && neighbors[i] < -threshold) ||
-                    (convolve < 0 && neighbors[i] > threshold))
+                if ((convolve > threshold && neighbors[i] < -threshold) ||
+                    (convolve < -threshold && neighbors[i] > threshold))
                 {
                     zero_crossing = true;
                     break;
