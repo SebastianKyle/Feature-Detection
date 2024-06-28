@@ -46,9 +46,9 @@ Original | Sobel Edge
 
 - Laplace
 ```sh
-.\EdgeDetector.exe -laplace "path/to/repo/images/image.png" "path/to/repo/results/out_image.png"
+.\EdgeDetector.exe -laplace "path/to/repo/images/image.png" "path/to/repo/results/out_image.png" <threshold>
 ```
-Original | Laplace Edge
+Original | Laplace Edge (threshold = 10.0)
 :--------------------------:|:--------------------------:
 ![](./images/Valve.png) | ![](./results/laplace_edge_Valve.png)
 
