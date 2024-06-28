@@ -67,7 +67,7 @@ int main(int argc, char **argv)
         {
             filter->gaussian_filter(source_img, filtered_img, 3);
         }
-        success = edge_detector->detect_by_laplace(filtered_img, dest_img);        
+        success = edge_detector->detect_by_laplace(filtered_img, dest_img, char_2_double(argv, 4));
     }
     else if (str_compare(argv[1], "-canny")) {
         success = edge_detector->detect_by_canny(source_img, dest_img, char_2_int(argv, 4), char_2_int(argv, 5));

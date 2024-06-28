@@ -38,7 +38,7 @@ cmake ..
 ## Edge Detector
 - Sobel
 ```sh
-.\EdgeDetector.exe -sobel "path/to/repo/images" "path/to/repo/results"
+.\EdgeDetector.exe -sobel "path/to/repo/images/image.png" "path/to/repo/results/out_image.png"
 ```
 Original | Sobel Edge
 :--------------------------:|:--------------------------:
@@ -46,7 +46,7 @@ Original | Sobel Edge
 
 - Laplace
 ```sh
-.\EdgeDetector.exe -laplace "path/to/repo/images" "path/to/repo/results"
+.\EdgeDetector.exe -laplace "path/to/repo/images/image.png" "path/to/repo/results/out_image.png"
 ```
 Original | Laplace Edge
 :--------------------------:|:--------------------------:
@@ -54,7 +54,7 @@ Original | Laplace Edge
 
 - Canny
 ```sh
-.\EdgeDetector.exe -canny "path/to/repo/images" "path/to/repo/results" <min-gradient> <max-gradient>
+.\EdgeDetector.exe -canny "path/to/repo/images/image.png" "path/to/repo/results/out_image.png" <min-gradient> <max-gradient>
 ```
 Original | Canny Edge (min-gradient = 100 & max-gradient = 150)
 :--------------------------:|:--------------------------:
@@ -63,7 +63,7 @@ Original | Canny Edge (min-gradient = 100 & max-gradient = 150)
 ## Corner Detector
 - Harris
 ```sh
-.\EdgeDetector.exe -harris "path/to/repo/images" "path/to/repo/results" <block-size> <aperture-size> <k>
+.\EdgeDetector.exe -harris "path/to/repo/images/image.png" "path/to/repo/results/out_image.png" <block-size> <aperture-size> <k>
 ```
 k between 0.04 and 0.06 is recommended
 Original | Harris corner (block-size = 5 & aperture-size = 3 & k = 0.04)
@@ -73,7 +73,7 @@ Original | Harris corner (block-size = 5 & aperture-size = 3 & k = 0.04)
 ## Feature Detector
 - SIFT
 ```sh
-.\EdgeDetector.exe -sift "path/to/repo/images" "path/to/repo/results" <contrast-threshold>
+.\EdgeDetector.exe -sift "path/to/repo/images/image.png" "path/to/repo/results/out_image.png" <contrast-threshold>
 ```
 Original | SIFT Keypoints (constrast-threshold = 0.025) | SIFT Keypoints (constrast-threshold = 0.025 and different orientation)
 :-------------------------:|:-------------------------:|:------------------------:

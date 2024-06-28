@@ -64,7 +64,7 @@ int EdgeDetector::detect_by_sobel(const cv::Mat &source_img, cv::Mat &dest_img)
     return 1;
 }
 
-int EdgeDetector::detect_by_laplace(const cv::Mat &source_img, cv::Mat &dest_img)
+int EdgeDetector::detect_by_laplace(const cv::Mat &source_img, cv::Mat &dest_img, float threshold)
 {
     if (!source_img.data)
         return 0;
@@ -72,7 +72,6 @@ int EdgeDetector::detect_by_laplace(const cv::Mat &source_img, cv::Mat &dest_img
     cv::Mat output = cv::Mat::zeros(source_img.size(), CV_8U);
     int width = source_img.cols, height = source_img.rows;
 
-    float threshold = 40.0;
     for (int y = 1; y < height - 1; y++)
     {
         for (int x = 1; x < width - 1; x++)
