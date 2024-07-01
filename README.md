@@ -14,7 +14,7 @@ Application includes Edge Detection, Corner Detection and Key Feature Detection
 ### Clone the Repository
 
 ```sh
-git clone https://github.com/yourusername/EdgeDetector.git
+git clone https://github.com/SebastianKyle/EdgeDetector.git
 cd EdgeDetector
 ```
 
