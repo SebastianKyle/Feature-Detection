@@ -14,11 +14,12 @@ Application includes Edge Detection, Corner Detection and Key Feature Detection
 ### Clone the Repository
 
 ```sh
-git clone https://github.com/SebastianKyle/EdgeDetector.git
+git clone https://github.com/SebastianKyle/Feature-Detection.git
 cd EdgeDetector
 ```
 
 ### Build the project
+- One can use the application directly using the pre-built Visual Studio Solution named 'EdgeDetection' in 'build' folder or the executable file in the 'build/Debug' folder.
 - Build visual studio solution in build folder
 ```sh
 mkdir build

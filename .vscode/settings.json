@@ -10,7 +10,7 @@
         "xstring": "cpp"
     },
     "cmake.debugConfig": {
-        "args": ["-laplace", "D:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/images/Valve.png", "D:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/results/laplace_edge_Valve.png", "10.0"],
+        "args": ["-laplace", "D:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/images/coin.jpeg", "D:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/results/laplace_edge_coin.jpeg", "10.0"],
         "cwd": "${workspaceFolder}",
     }
 }
