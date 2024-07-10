@@ -11,9 +11,13 @@ std::vector<std::vector<cv::Mat>> SIFTDetector::buildGaussianPyramid(const cv::M
 {
     std::vector<std::vector<cv::Mat>> gauss_pyramid(num_octaves);
 
+    // double k = pow(2, 1 / (num_scales));
+    // double initial_sigma = 1.6;
     for (int i = 0; i < num_octaves; ++i)
     {
         gauss_pyramid[i].resize(num_scales + 3);
+
+        // double sigma = initial_sigma * pow(2, i);
         for (int j = 0; j < num_scales + 3; ++j)
         {
             if (i == 0 && j == 0)
@@ -26,6 +30,7 @@ std::vector<std::vector<cv::Mat>> SIFTDetector::buildGaussianPyramid(const cv::M
             }
             else
             {
+                // sigma *= k;
                 double sigma = pow(2, j / static_cast<double>(num_scales));
                 cv::GaussianBlur(gauss_pyramid[i][j - 1], gauss_pyramid[i][j], cv::Size(0, 0), sigma);
             }
@@ -69,6 +74,7 @@ void SIFTDetector::detectExtrema(const std::vector<std::vector<cv::Mat>> &dog_py
     for (int octave = 0; octave < dog_pyramid.size(); octave++)
     {
         const auto& dog_images = dog_pyramid[octave];
+        float k = std::pow(2, 1.0 / dog_images.size());
 
         for (int scale = 1; scale < dog_images.size() - 1; scale++)
         {
@@ -134,7 +140,12 @@ void SIFTDetector::detectExtrema(const std::vector<std::vector<cv::Mat>> &dog_py
                             // kp.pt.y = y;
                             kp.pt = cv::Point2f(x * pow(2, octave), y * pow(2, octave));
                             // kp.size = pow(2, octave + scale / static_cast<float>(dog_images.size()));
-                            kp.size = 1.6 * pow(2, (scale + octave) / static_cast<float>(dog_images.size()));
+                            // kp.size = 1.6 * pow(2, (scale + octave) / static_cast<float>(dog_images.size()));
+                            // kp.size = 1.6 * pow(2, (scale + octave));
+                            // kp.size = pow(2, scale / static_cast<double>(dog_images.size()));
+                            // float sigma = 1.6 * std::pow(k, scale);
+                            // kp.size = sigma * pow(2, octave) * 5;
+                            kp.size = 1.6 * pow(2, octave) * pow(2, scale / dog_images.size());
 
                             // Gradient of D(x, y, sigma)
                             cv::Matx31f dD(

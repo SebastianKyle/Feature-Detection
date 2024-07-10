@@ -10,7 +10,18 @@
         "xstring": "cpp"
     },
     "cmake.debugConfig": {
-        "args": ["-laplace", "D:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/images/coin.jpeg", "D:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/results/laplace_edge_coin.jpeg", "10.0"],
+        "args": [
+            // "-laplace",
+            // "D:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/images/coin.jpeg",
+            // "D:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/results/laplace_edge_coin.jpeg",
+            // "10.0"
+
+            // SIFT arguments
+            "-sift",
+            "D:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/images/box2.jpg",
+            "D:/Self_Practicing/Computer Vision/Learning_OpenCV/EdgeDetector/results/sift_box2.jpg",
+            "0.03",
+        ],
         "cwd": "${workspaceFolder}",
     }
 }
